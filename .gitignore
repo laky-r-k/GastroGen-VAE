@@ -1,0 +1,44 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Machine Learning models & large weights
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.pkl
+*.joblib
+*.onnx
+*.bin
+
+# Data & results directories (uncomment if you want to exclude them from git)
+# dataset/
+# results/
+
+# Logs & visualization runs
+*.log
+runs/
+wandb/
+tensorboard/
+
+# IDE & OS configuration
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Environment variables & keys
+.env
+.env.*
