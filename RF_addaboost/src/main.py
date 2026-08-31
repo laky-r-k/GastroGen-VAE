@@ -15,7 +15,7 @@ SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
-from data_loader import load_raw_data
+from data_loader import load_raw_data 
 from preprocessing import PreprocessingPipeline
 from train import train_and_export_pipeline
 
@@ -78,6 +78,7 @@ def main():
 
     # 1. Load Data
     raw_df = load_raw_data(args.data_path)
+
 
     # 2. Build Preprocessing Pipeline
     pipeline = PreprocessingPipeline(
