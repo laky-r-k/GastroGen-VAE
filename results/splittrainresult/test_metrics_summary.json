@@ -1,0 +1,58 @@
+{
+    "Random Forest": {
+        "roc_auc": 0.8428571428571429,
+        "pr_auc": 0.8647051465125031,
+        "accuracy": 0.7746478873239436,
+        "f1_score": 0.7647058823529411,
+        "precision": 0.8125,
+        "recall_sensitivity": 0.7222222222222222,
+        "specificity": 0.8285714285714286,
+        "brier_score": 0.16349166141341517,
+        "true_positives": 52,
+        "true_negatives": 58,
+        "false_positives": 12,
+        "false_negatives": 20
+    },
+    "AdaBoost": {
+        "roc_auc": 0.8272817460317461,
+        "pr_auc": 0.8337223291271744,
+        "accuracy": 0.7323943661971831,
+        "f1_score": 0.7246376811594203,
+        "precision": 0.7575757575757576,
+        "recall_sensitivity": 0.6944444444444444,
+        "specificity": 0.7714285714285715,
+        "brier_score": 0.17973458692110952,
+        "true_positives": 50,
+        "true_negatives": 54,
+        "false_positives": 16,
+        "false_negatives": 22
+    },
+    "Soft Voting (RF + AdaBoost)": {
+        "roc_auc": 0.8430555555555557,
+        "pr_auc": 0.8601882092779546,
+        "accuracy": 0.7323943661971831,
+        "f1_score": 0.7246376811594203,
+        "precision": 0.7575757575757576,
+        "recall_sensitivity": 0.6944444444444444,
+        "specificity": 0.7714285714285715,
+        "brier_score": 0.1690997806695769,
+        "true_positives": 50,
+        "true_negatives": 54,
+        "false_positives": 16,
+        "false_negatives": 22
+    },
+    "Stacking (RF + AdaBoost)": {
+        "roc_auc": 0.844047619047619,
+        "pr_auc": 0.8630811272716497,
+        "accuracy": 0.7605633802816901,
+        "f1_score": 0.7638888888888888,
+        "precision": 0.7638888888888888,
+        "recall_sensitivity": 0.7638888888888888,
+        "specificity": 0.7571428571428571,
+        "brier_score": 0.16194539990618154,
+        "true_positives": 55,
+        "true_negatives": 53,
+        "false_positives": 17,
+        "false_negatives": 17
+    }
+}

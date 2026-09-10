@@ -14,7 +14,9 @@ from sklearn.model_selection import StratifiedKFold
 
 from vae_model import TabularVAE
 from vae_trainer import VAETrainer
-from vae_preprocessing import VAEPreprocessingPipeline
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from preprocessing import VAEPreprocessingPipeline
 from downstream_classifiers import (
     build_rf_classifier,
     build_adaboost_classifier,
@@ -22,7 +24,7 @@ from downstream_classifiers import (
     build_stacking,
     save_joblib,
 )
-from vae_evaluate import (
+from evaluation import (
     compute_metrics,
     plot_vae_loss_curves,
     plot_latent_space_tsne,
