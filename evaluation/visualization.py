@@ -1,36 +1,11 @@
 import os
-import json
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from typing import Dict, Any, List
+from typing import Dict, List
+from sklearn.metrics import roc_curve, precision_recall_curve, average_precision_score, roc_auc_score, confusion_matrix
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
-from sklearn.metrics import (
-    roc_auc_score, roc_curve, precision_recall_curve, average_precision_score,
-    accuracy_score, f1_score, precision_score, recall_score,
-    confusion_matrix, brier_score_loss,
-)
-
-def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray, y_prob: np.ndarray) -> Dict[str, float]:
-    cm = confusion_matrix(y_true, y_pred)
-    tn, fp, fn, tp = cm.ravel()
-    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0.0
-
-    return {
-        "roc_auc": float(roc_auc_score(y_true, y_prob)),
-        "pr_auc": float(average_precision_score(y_true, y_prob)),
-        "accuracy": float(accuracy_score(y_true, y_pred)),
-        "f1_score": float(f1_score(y_true, y_pred)),
-        "precision": float(precision_score(y_true, y_pred)),
-        "recall_sensitivity": float(recall_score(y_true, y_pred)),
-        "specificity": float(specificity),
-        "brier_score": float(brier_score_loss(y_true, y_prob)),
-        "true_positives": int(tp),
-        "true_negatives": int(tn),
-        "false_positives": int(fp),
-        "false_negatives": int(fn),
-    }
 
 def plot_roc_curves(model_predictions: Dict[str, Dict[str, np.ndarray]], y_true: np.ndarray, output_path: str, title: str = "ROC Curves") -> None:
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -108,7 +83,6 @@ def plot_confusion_matrices(model_predictions: Dict[str, Dict[str, np.ndarray]],
     plt.savefig(output_path, bbox_inches="tight")
     plt.close()
 
-# RF Specific
 def plot_feature_importance(feature_names: List[str], importances: np.ndarray, output_path: str, top_n: int = 20) -> None:
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     feat_df = pd.DataFrame({"Feature": feature_names, "Importance": importances}).sort_values(by="Importance", ascending=True)
@@ -126,15 +100,6 @@ def plot_feature_importance(feature_names: List[str], importances: np.ndarray, o
     plt.savefig(output_path)
     plt.close()
 
-def save_results_summary(all_metrics: Dict[str, Dict[str, float]], cv_fold_df: pd.DataFrame, feature_names: List[str], feature_importances: np.ndarray, results_dir: str) -> None:
-    os.makedirs(results_dir, exist_ok=True)
-    with open(os.path.join(results_dir, "metrics_summary.json"), "w") as f:
-        json.dump(all_metrics, f, indent=4)
-    cv_fold_df.to_csv(os.path.join(results_dir, "cv_fold_scores.csv"), index=False)
-    feat_df = pd.DataFrame({"feature": feature_names, "importance": feature_importances}).sort_values(by="importance", ascending=False)
-    feat_df.to_csv(os.path.join(results_dir, "feature_importance_ranking.csv"), index=False)
-
-# VAE Specific
 def plot_vae_loss_curves(history: Dict[str, List[float]], output_path: str) -> None:
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     epochs = history["epoch"]
@@ -183,10 +148,3 @@ def plot_reconstruction_r2(r2_df: pd.DataFrame, output_path: str, top_n: int = 2
     plt.tight_layout()
     plt.savefig(output_path)
     plt.close()
-
-def save_vae_results_summary(all_metrics: Dict[str, Dict[str, float]], cv_fold_df: pd.DataFrame, r2_df: pd.DataFrame, results_dir: str) -> None:
-    os.makedirs(results_dir, exist_ok=True)
-    with open(os.path.join(results_dir, "vae_ensemble_metrics_summary.json"), "w") as f:
-        json.dump(all_metrics, f, indent=4)
-    cv_fold_df.to_csv(os.path.join(results_dir, "vae_cv_fold_scores.csv"), index=False)
-    r2_df.to_csv(os.path.join(results_dir, "vae_reconstruction_r2.csv"), index=False)
