@@ -1,0 +1,72 @@
+{
+    "Random Forest": {
+        "roc_auc": 0.8184523809523809,
+        "pr_auc": 0.8345214731661001,
+        "accuracy": 0.7112676056338029,
+        "f1_score": 0.7007299270072993,
+        "precision": 0.7384615384615385,
+        "recall_sensitivity": 0.6666666666666666,
+        "specificity": 0.7571428571428571,
+        "brier_score": 0.17654222574900016,
+        "true_positives": 48,
+        "true_negatives": 53,
+        "false_positives": 17,
+        "false_negatives": 24
+    },
+    "AdaBoost": {
+        "roc_auc": 0.8031746031746032,
+        "pr_auc": 0.8217561882362892,
+        "accuracy": 0.6901408450704225,
+        "f1_score": 0.6901408450704225,
+        "precision": 0.7,
+        "recall_sensitivity": 0.6805555555555556,
+        "specificity": 0.7,
+        "brier_score": 0.1870302286020898,
+        "true_positives": 49,
+        "true_negatives": 49,
+        "false_positives": 21,
+        "false_negatives": 23
+    },
+    "Gradient Boosting": {
+        "roc_auc": 0.8023809523809524,
+        "pr_auc": 0.8081626780165831,
+        "accuracy": 0.7112676056338029,
+        "f1_score": 0.7172413793103448,
+        "precision": 0.7123287671232876,
+        "recall_sensitivity": 0.7222222222222222,
+        "specificity": 0.7,
+        "brier_score": 0.20666597173009196,
+        "true_positives": 52,
+        "true_negatives": 49,
+        "false_positives": 21,
+        "false_negatives": 20
+    },
+    "Soft Voting (RF+Ada+GB)": {
+        "roc_auc": 0.8214285714285714,
+        "pr_auc": 0.8336990470824391,
+        "accuracy": 0.7323943661971831,
+        "f1_score": 0.7361111111111112,
+        "precision": 0.7361111111111112,
+        "recall_sensitivity": 0.7361111111111112,
+        "specificity": 0.7285714285714285,
+        "brier_score": 0.17857107477693035,
+        "true_positives": 53,
+        "true_negatives": 51,
+        "false_positives": 19,
+        "false_negatives": 19
+    },
+    "Stacking (RF+Ada+GB)": {
+        "roc_auc": 0.8212301587301587,
+        "pr_auc": 0.8334654958006369,
+        "accuracy": 0.7253521126760564,
+        "f1_score": 0.7346938775510204,
+        "precision": 0.72,
+        "recall_sensitivity": 0.75,
+        "specificity": 0.7,
+        "brier_score": 0.18182558893306827,
+        "true_positives": 54,
+        "true_negatives": 49,
+        "false_positives": 21,
+        "false_negatives": 18
+    }
+}

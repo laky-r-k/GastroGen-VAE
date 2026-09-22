@@ -12,6 +12,8 @@ import pandas as pd
 from typing import Dict, Any, Tuple, List
 from sklearn.model_selection import StratifiedKFold
 
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from preprocessing import PreprocessingPipeline
 from models import (
     build_random_forest,
@@ -20,7 +22,7 @@ from models import (
     build_stacking_ensemble,
     save_model,
 )
-from evaluate import (
+from evaluation import (
     compute_metrics,
     plot_roc_curves,
     plot_precision_recall_curves,

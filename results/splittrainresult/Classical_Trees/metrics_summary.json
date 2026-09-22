@@ -1,0 +1,72 @@
+{
+    "Random Forest": {
+        "roc_auc": 0.8472222222222222,
+        "pr_auc": 0.8695946498598908,
+        "accuracy": 0.7746478873239436,
+        "f1_score": 0.7647058823529411,
+        "precision": 0.8125,
+        "recall_sensitivity": 0.7222222222222222,
+        "specificity": 0.8285714285714286,
+        "brier_score": 0.16180005105121809,
+        "true_positives": 52,
+        "true_negatives": 58,
+        "false_positives": 12,
+        "false_negatives": 20
+    },
+    "AdaBoost": {
+        "roc_auc": 0.8272817460317461,
+        "pr_auc": 0.8337223291271744,
+        "accuracy": 0.7323943661971831,
+        "f1_score": 0.7246376811594203,
+        "precision": 0.7575757575757576,
+        "recall_sensitivity": 0.6944444444444444,
+        "specificity": 0.7714285714285715,
+        "brier_score": 0.17973458692110952,
+        "true_positives": 50,
+        "true_negatives": 54,
+        "false_positives": 16,
+        "false_negatives": 22
+    },
+    "Gradient Boosting": {
+        "roc_auc": 0.8521825396825397,
+        "pr_auc": 0.8786175595578751,
+        "accuracy": 0.7676056338028169,
+        "f1_score": 0.7692307692307693,
+        "precision": 0.7746478873239436,
+        "recall_sensitivity": 0.7638888888888888,
+        "specificity": 0.7714285714285715,
+        "brier_score": 0.1735014300352517,
+        "true_positives": 55,
+        "true_negatives": 54,
+        "false_positives": 16,
+        "false_negatives": 17
+    },
+    "Soft Voting (RF+Ada+GB)": {
+        "roc_auc": 0.8575396825396826,
+        "pr_auc": 0.8755206749013285,
+        "accuracy": 0.7676056338028169,
+        "f1_score": 0.7692307692307693,
+        "precision": 0.7746478873239436,
+        "recall_sensitivity": 0.7638888888888888,
+        "specificity": 0.7714285714285715,
+        "brier_score": 0.15623343223804015,
+        "true_positives": 55,
+        "true_negatives": 54,
+        "false_positives": 16,
+        "false_negatives": 17
+    },
+    "Stacking (RF+Ada+GB)": {
+        "roc_auc": 0.8551587301587302,
+        "pr_auc": 0.8741052205553825,
+        "accuracy": 0.7746478873239436,
+        "f1_score": 0.7777777777777778,
+        "precision": 0.7777777777777778,
+        "recall_sensitivity": 0.7777777777777778,
+        "specificity": 0.7714285714285715,
+        "brier_score": 0.15669965327325164,
+        "true_positives": 56,
+        "true_negatives": 54,
+        "false_positives": 16,
+        "false_negatives": 16
+    }
+}
