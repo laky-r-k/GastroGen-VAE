@@ -13,7 +13,7 @@ from evaluation import run_classification_evaluation, run_vae_evaluation
 
 
 def main():
-    results_dir = os.path.join(os.path.dirname(__file__), "experiment1_results")
+    base_results_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "experiment1")
 
     # 1. Load processed dataset
     print("Loading datasets...")
@@ -36,8 +36,15 @@ def main():
     trainer = VAETrainer(vae, lr=1e-3, beta=0.005)
     trainer.fit(X_train, epochs=100, batch_size=64, verbose=True)
 
-    # Optional: run standard VAE evaluations (loss curves, R2, t-SNE)
-    run_vae_evaluation(vae, X_test, y_test, feature_cols, trainer.history, results_dir)
+    # VAE Diagnostics → results/experiment1/vae_diagnostics/
+    run_vae_evaluation(
+        vae_model=vae,
+        X_test=X_test,
+        y_test=y_test,
+        feature_names=feature_cols,
+        history=trainer.history,
+        results_dir=os.path.join(base_results_dir, "vae_diagnostics")
+    )
 
     # 3. Extract encoding from VAE and train VAE + Gradient Boosting
     print("Extracting latent representations...")
@@ -48,31 +55,32 @@ def main():
     print("Training VAE + Gradient Boosting model...")
     gb_vae_core = build_gradient_boosting(random_state=42)
     gb_vae_core.fit(Z_train, y_train)
-
-    # Wrap using the shared VAEClassifierPipeline from model_src
     vae_gb_pipeline = VAEClassifierPipeline(vae, gb_vae_core)
+
+    # VAE + GB Results → results/experiment1/vae_gradient_boosting/
+    run_classification_evaluation(
+        models={"VAE + Gradient Boosting": vae_gb_pipeline},
+        X_test=X_test,
+        y_test=y_test,
+        results_dir=os.path.join(base_results_dir, "vae_gradient_boosting"),
+        feature_names=feature_cols
+    )
 
     # 4. Train Standalone Gradient Boosting Model (Baseline)
     print("Training Baseline Gradient Boosting model (Original Features)...")
     gb_baseline = build_gradient_boosting(random_state=42)
     gb_baseline.fit(X_train, y_train)
 
-    # 5. Evaluate both models and compare results
-    models_to_evaluate = {
-        "VAE + Gradient Boosting": vae_gb_pipeline,
-        "Baseline Gradient Boosting": gb_baseline
-    }
-
-    # 6. Save results in experiment1_results folder
-    metrics = run_classification_evaluation(
-        models=models_to_evaluate,
+    # Baseline GB Results → results/experiment1/gradient_boosting/
+    run_classification_evaluation(
+        models={"Gradient Boosting": gb_baseline},
         X_test=X_test,
         y_test=y_test,
-        results_dir=results_dir,
+        results_dir=os.path.join(base_results_dir, "gradient_boosting"),
         feature_names=feature_cols
     )
 
-    print("Experiment 1 complete! Results saved in:", results_dir)
+    print("\nExperiment 1 complete! Results saved in:", base_results_dir)
 
 
 if __name__ == "__main__":
