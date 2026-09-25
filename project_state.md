@@ -5,3 +5,5 @@
 
 -> evalution module : all evalution methods seperated based on types and use like graphical ,mathematical,and abstracted based on use like for vae and tree based ...also saving is included in this which is to be modified later
 -> model_src  : model definition
+
+agy --conversation=49b4f532-73f2-44d1-8e7f-1c2f0127d2be

@@ -25,3 +25,19 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray, y_prob: np.ndarray) 
         "false_positives": int(fp),
         "false_negatives": int(fn),
     }
+
+import pandas as pd
+from sklearn.metrics import r2_score
+from typing import List
+
+def compute_reconstruction_r2(X_input: np.ndarray, X_recon: np.ndarray, feature_names: List[str]) -> pd.DataFrame:
+    """
+    Computes per-feature R2 reconstruction scores to measure how well each biomarker is preserved.
+    """
+    r2_scores = []
+    for i, feat in enumerate(feature_names):
+        score = r2_score(X_input[:, i], X_recon[:, i])
+        mse = np.mean((X_input[:, i] - X_recon[:, i]) ** 2)
+        r2_scores.append({"feature": feat, "r2_score": max(0.0, score), "mse": mse})
+
+    return pd.DataFrame(r2_scores).sort_values(by="r2_score", ascending=False)

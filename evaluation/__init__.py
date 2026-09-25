@@ -1,4 +1,4 @@
-from .metrics import compute_metrics
+from .metrics import compute_metrics, compute_reconstruction_r2
 from .visualization import (
     plot_roc_curves, plot_precision_recall_curves, plot_confusion_matrices,
     plot_feature_importance, plot_vae_loss_curves, plot_latent_space_tsne,
@@ -8,6 +8,7 @@ from .reporting import save_results_summary, save_vae_results_summary
 
 __all__ = [
     "compute_metrics",
+    "compute_reconstruction_r2",
     "plot_roc_curves",
     "plot_precision_recall_curves",
     "plot_confusion_matrices",
