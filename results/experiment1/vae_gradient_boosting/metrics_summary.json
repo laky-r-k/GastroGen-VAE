@@ -1,0 +1,16 @@
+{
+    "VAE + Gradient Boosting": {
+        "roc_auc": 0.7261904761904762,
+        "pr_auc": 0.7031067711271571,
+        "accuracy": 0.6619718309859155,
+        "f1_score": 0.6712328767123288,
+        "precision": 0.6621621621621622,
+        "recall_sensitivity": 0.6805555555555556,
+        "specificity": 0.6428571428571429,
+        "brier_score": 0.22717335047836443,
+        "true_positives": 49,
+        "true_negatives": 45,
+        "false_positives": 25,
+        "false_negatives": 23
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "Gradient Boosting": {
+        "roc_auc": 0.8603174603174604,
+        "pr_auc": 0.8920979419528402,
+        "accuracy": 0.7816901408450704,
+        "f1_score": 0.7862068965517242,
+        "precision": 0.7808219178082192,
+        "recall_sensitivity": 0.7916666666666666,
+        "specificity": 0.7714285714285715,
+        "brier_score": 0.1647104117893327,
+        "true_positives": 57,
+        "true_negatives": 54,
+        "false_positives": 16,
+        "false_negatives": 15
+    }
+}
