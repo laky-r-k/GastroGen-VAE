@@ -1,94 +1,42 @@
-#need restructure processing code into a module
-->preproccessing code needs to be sepearated and made into a module  can be include in data_handling think so
+# Project State & Roadmap
 
-#already created   
+## Modules & Architecture Status
+- [x] **evaluation module (`evaluation/`)**: Decoupled into `metrics.py`, `visualization.py`, `reporting.py`, `classification_evaluation.py`, and `VAE_evalution.py`.
+- [x] **model_src module (`model_src/`)**: Unified model definitions (`tree/`, `VAE/`, and `vae_pipeline.py`).
+- [x] **experiment framework (`experiments/` & `run.py`)**: 
+  - `experiments/base_experiment.py`: `BaseExperiment` ABC handling YAML config loading, auto-generated timestamped run folders, configuration snapshotting for 100% reproducibility, and dataset loading helpers.
+  - `experiments/configs/`: YAML-driven configs per experiment (e.g. `experiment1.yaml`).
+  - `experiments/run.py` & root `run.py`: Unified CLI entry point (`python3 run.py --exp experiment1`, `python3 run.py --list`).
+  - `experiments/experiment1.py`: Refactored to subclass `BaseExperiment`.
+- [ ] **preprocessing refactor**: Preprocessing code in root needs to be modularized and moved into `data_handling/`.
 
--> evalution module : all evalution methods seperated based on types and use like graphical ,mathematical,and abstracted based on use like for vae and tree based ...also saving is included in this which is to be modified later
--> model_src  : model definition
+---
 
-agy --conversation=49b4f532-73f2-44d1-8e7f-1c2f0127d2be
+## Experiment Framework Usage
 
+```bash
+# 1. List all registered experiments
+python3 run.py --list
 
+# 2. Run an experiment with default YAML config
+python3 run.py --exp experiment1
 
+# 3. Run with a custom config
+python3 run.py --exp experiment1 --config path/to/custom_config.yaml
 
-## Suggested Design
+# 4. Run without timestamped subfolder (outputs directly to results/experiment1/)
+python3 run.py --exp experiment1 --no-timestamp
+```
 
-  ### 1. Config-Driven Experiments
-  Instead of hardcoding hyperparameters inside each experiment script, each
-  experiment gets a YAML config file. This way you can re-run the same
-  experiment with different settings without touching the code.
-    experiments/
-    ├── configs/
-    │   ├── experiment1.yaml      ← hyperparams, model choices, dataset paths
-    │   ├── experiment2.yaml
-    │   └── experiment3.yaml
-    ├── experiment1.py            ← reads its config, runs the logic
-    ├── experiment2.py
-    └── run.py                    ← single entry point: python run.py --exp
-  experiment1
-  ### 2. Versioned Results with Timestamps
+---
 
-  Every time you run an experiment, results go into a timestamped subfolder.
-  This way you never accidentally overwrite old results when you re-run with
-  different configs.
-
-    results/
-    ├── experiment1/
-    │   ├── run_2026-09-25_21-00/     ← first run
-    │   │   ├── config.yaml           ← copy of config used (reproducibility)
-    │   │   ├── vae_diagnostics/
-    │   │   ├── vae_gradient_boosting/
-    │   │   └── gradient_boosting/
-    │   └── run_2026-09-26_10-00/     ← second run with different params
-    │       ├── config.yaml
-    │       └── ...
-    ├── experiment2/
-    └── ...
-
-  ### 3. Single Entry Point (run.py)
-
-    # python run.py --exp experiment1
-    # python run.py --exp experiment2
-
-  This calls the right experiment script and automatically creates the
-  timestamped results folder. No need to manually manage paths inside each
-  experiment.
-
-  ### 4. Base Experiment Class
-
-  Each experiment inherits from a BaseExperiment class that handles the
-  boilerplate (loading config, creating result dirs, saving a copy of the
-  config used):
-
-    experiments/
-    └── base_experiment.py    ← BaseExperiment class
-  ──────
-  ## How it would look in code
-
-    # python run.py --exp experiment1
-    
-    BaseExperiment
-        ├── loads configs/experiment1.yaml
-        ├── creates results/experiment1/run_2026-09-25_21-00/
-        ├── copies config.yaml into that folder
-        └── calls experiment1.run()
-  ──────
-  ## What goes in a config file
-
-    # configs/experiment1.yaml
-    experiment: experiment1
-    dataset:
-      train: dataset/processed_dataset/processed_train.csv
-      test:  dataset/processed_dataset/processed_test.csv
-    
-    vae:
-      latent_dim: 8
-      epochs: 100
-      batch_size: 64
-      lr: 0.001
-      beta: 0.005
-    
-    gradient_boosting:
-      n_estimators: 200
-      max_depth: 4
-      random_state: 42
+## Results Directory Structure
+```text
+results/
+├── experiment1/
+│   ├── run_2026-10-11_02-10-00/      # Timestamped run
+│   │   ├── config.yaml               # Snapshot of config used for this run
+│   │   ├── vae_diagnostics/          # Loss curves, t-SNE, R² reconstruction
+│   │   ├── vae_gradient_boosting/    # ROC, PR, Confusion Matrix, metrics_summary.json
+│   │   └── gradient_boosting/        # Baseline GB metrics and curves
+```

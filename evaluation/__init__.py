@@ -26,3 +26,6 @@ __all__.extend([
     "run_classification_evaluation",
     "run_vae_evaluation"
 ])
+from .synthetic_fidelity import run_full_fidelity_suite
+
+__all__.extend(["run_full_fidelity_suite"])
