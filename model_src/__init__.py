@@ -1,5 +1,5 @@
 from .tree import build_random_forest, build_adaboost, build_gradient_boosting
-from .VAE import TabularVAE, VAETrainer, SemiSupervisedTabularVAE
+from .VAE import TabularVAE, VAETrainer, SemiSupervisedTabularVAE, SemiSupervisedVAETrainer
 from .GAN import Generator, Critic, WGANGPTrainer
 from .vae_pipeline import VAEClassifierPipeline
 
@@ -10,6 +10,7 @@ __all__ = [
     "TabularVAE",
     "VAETrainer",
     "SemiSupervisedTabularVAE",
+    "SemiSupervisedVAETrainer",
     "Generator",
     "Critic",
     "WGANGPTrainer",
