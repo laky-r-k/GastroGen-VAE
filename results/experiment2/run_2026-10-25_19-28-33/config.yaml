@@ -1,0 +1,37 @@
+experiment: experiment2
+description: Evaluates whether WGAN-GP synthetic augmentation improves VAE + Gradient
+  Boosting across multiple random seeds and beta parameters
+seeds:
+- 42
+- 123
+- 456
+- 789
+- 2024
+dataset:
+  train_real_path: dataset/processed_dataset/processed_train.csv
+  train_synthetic_path: dataset/synthetic_dataset/synthetic_train.csv
+  test_real_path: dataset/processed_dataset/processed_test.csv
+  label_column: label
+augmentation:
+  synthetic_ratio: 1.0
+beta_values:
+- 0.0005
+- 0.005
+- 0.05
+- 0.5
+vae:
+  latent_dim: 8
+  hidden_dim1: 128
+  hidden_dim2: 64
+  dropout_rate: 0.1
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  epochs: 100
+  batch_size: 64
+gradient_boosting:
+  n_estimators: 200
+  learning_rate: 0.1
+  max_depth: 4
+  min_samples_split: 4
+  min_samples_leaf: 2
+  max_features: sqrt
