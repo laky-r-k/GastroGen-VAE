@@ -1,0 +1,45 @@
+experiment: experiment3
+description: Evaluates Semi-Supervised VAE with End-to-End Neural Classifier and SS-VAE
+  + Gradient Boosting on Augmented Training Data
+seeds:
+- 42
+- 123
+- 456
+- 789
+- 2024
+dataset:
+  train_real_path: dataset/processed_dataset/processed_train.csv
+  train_synthetic_path: dataset/synthetic_dataset/synthetic_train.csv
+  test_real_path: dataset/processed_dataset/processed_test.csv
+  label_column: label
+augmentation:
+  synthetic_ratio: 1.0
+ss_vae:
+  latent_dim: 8
+  hidden_dim1: 128
+  hidden_dim2: 64
+  classifier_hidden: 32
+  dropout_rate: 0.1
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  beta: 0.005
+  alpha: 10.0
+  epochs: 100
+  batch_size: 64
+unsupervised_vae:
+  latent_dim: 8
+  hidden_dim1: 128
+  hidden_dim2: 64
+  dropout_rate: 0.1
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  beta: 0.005
+  epochs: 100
+  batch_size: 64
+gradient_boosting:
+  n_estimators: 200
+  learning_rate: 0.1
+  max_depth: 4
+  min_samples_split: 4
+  min_samples_leaf: 2
+  max_features: sqrt
