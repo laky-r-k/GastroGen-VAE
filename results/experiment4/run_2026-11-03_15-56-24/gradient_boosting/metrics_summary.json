@@ -1,0 +1,16 @@
+{
+    "Paper-parameter Gradient Boosting": {
+        "roc_auc": 0.8549603174603174,
+        "pr_auc": 0.8871953831821328,
+        "accuracy": 0.7676056338028169,
+        "f1_score": 0.7724137931034483,
+        "precision": 0.7671232876712328,
+        "recall_sensitivity": 0.7777777777777778,
+        "specificity": 0.7571428571428571,
+        "brier_score": 0.16727950290838847,
+        "true_positives": 56,
+        "true_negatives": 53,
+        "false_positives": 17,
+        "false_negatives": 16
+    }
+}
