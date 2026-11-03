@@ -1,0 +1,26 @@
+{
+  "created_at_utc": "2026-11-03T11:59:59.102626+00:00",
+  "source_csv": "/home/laky/Desktop/proj/major_project/dataset/orginal_data/gastric_cancer_dataset_raw.csv",
+  "train_csv": "gastric_cancer_train.csv",
+  "test_csv": "gastric_cancer_test.csv",
+  "total_rows": 709,
+  "train_rows": 496,
+  "test_rows": 213,
+  "requested_train_percent": 70,
+  "requested_test_percent": 30,
+  "actual_train_percent": 69.9577,
+  "actual_test_percent": 30.0423,
+  "label_column": "label",
+  "train_label_counts": {
+    "0": 218,
+    "1": 278
+  },
+  "test_label_counts": {
+    "0": 93,
+    "1": 120
+  },
+  "id_column": "patient_id",
+  "random_seed": 123,
+  "stratified": true,
+  "preprocessing_applied": false
+}
