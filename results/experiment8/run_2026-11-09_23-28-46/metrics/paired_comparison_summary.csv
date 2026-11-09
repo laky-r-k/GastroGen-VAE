@@ -1,0 +1,2 @@
+beta,n_seeds,mean_ss_vae_minus_vae_auc,sd_paired_auc_difference,seeds_ss_vae_higher,seeds_tied,seeds_vae_higher
+1.0,59,0.033555069558350054,0.029163167736745058,51,0,8
