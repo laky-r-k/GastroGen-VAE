@@ -1,0 +1,55 @@
+{
+  "source_csv": "/home/laky/Desktop/proj/major_project/dataset/orginal_data/gastric_cancer_dataset_raw.csv",
+  "split_directory": "/home/laky/Desktop/proj/major_project/dataset/split70_30_seed123",
+  "train_rows": 496,
+  "test_rows": 213,
+  "random_seed": 123,
+  "stratified_by": "label",
+  "paper_input_features": [
+    "age",
+    "gender",
+    "neu",
+    "lym",
+    "neu_lym",
+    "hb",
+    "rdw",
+    "plt",
+    "alb",
+    "alt",
+    "tb",
+    "cr",
+    "tg",
+    "hdl",
+    "ldl",
+    "lpa",
+    "cea",
+    "ca125",
+    "ca199",
+    "ca724"
+  ],
+  "selected_model_features": [
+    "gender",
+    "age",
+    "neu_lym",
+    "hb",
+    "alb",
+    "cea",
+    "ca125",
+    "ca199"
+  ],
+  "outlier_rules_used": {
+    "hb": ">300",
+    "alb": ">100",
+    "rdw": ">40"
+  },
+  "outlier_rule_source": "Project dataset audit; paper does not specify cutoffs.",
+  "imputation": {
+    "method": "nearest fitted K-means centroid, feature-wise",
+    "clusters": 5,
+    "random_seed": 123,
+    "distance_scaling": "StandardScaler fitted on complete training records",
+    "fit_scope": "training split only"
+  },
+  "feature_selection": "Eight predictors reported by the paper; no test-set fitting.",
+  "note": "Paper does not publish exact split IDs, random seed, outlier cutoffs, or K-means cluster count."
+}

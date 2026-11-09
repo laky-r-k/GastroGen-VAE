@@ -1,0 +1,43 @@
+{
+  "seed_range": [
+    42,
+    100
+  ],
+  "number_of_splits": 59,
+  "split": "stratified 70/30, independently generated per seed",
+  "features": [
+    "gender",
+    "age",
+    "neu_lym",
+    "hb",
+    "alb",
+    "cea",
+    "ca125",
+    "ca199"
+  ],
+  "preprocessing": {
+    "anomaly_rules": {
+      "hb": ">300",
+      "alb": ">100",
+      "rdw": ">40"
+    },
+    "imputer": "training-fitted K-means centroid imputation; k=5"
+  },
+  "gradient_boosting_parameters": {
+    "n_estimators": 70,
+    "learning_rate": 0.12,
+    "max_depth": 5,
+    "min_samples_leaf": 10,
+    "min_samples_split": 2,
+    "max_features": null
+  },
+  "cv_auc_mean_across_seeds": 0.8566047741361731,
+  "cv_auc_sd_across_seeds": 0.013700562443162216,
+  "holdout_auc_mean": 0.8661199198104612,
+  "holdout_auc_sd": 0.021337590990778817,
+  "holdout_auc_min": 0.8188172043010753,
+  "holdout_auc_min_seed": 62,
+  "holdout_auc_max": 0.9103942652329748,
+  "holdout_auc_max_seed": 93,
+  "interpretation": "Each row is a different random 70/30 split; this describes split sensitivity, not independent external validation."
+}
