@@ -1,0 +1,42 @@
+experiment: experiment9
+description: Generate reusable 8-feature synthetic cohorts with WGAN-GP, VAE decoder,
+  and SMOTE; audit fidelity and novelty without diagnostic classifiers
+seed: 42
+synthetic_output_dir: dataset/synthetic_8_features
+log1p_features:
+- neu_lym
+- cea
+- ca125
+- ca199
+runtime:
+  torch_num_threads: 1
+dataset:
+  train_path: dataset/split70_30/processed_and_selected_feature/gastric_cancer_train.csv
+  test_path: dataset/split70_30/processed_and_selected_feature/gastric_cancer_test.csv
+wgan_gp:
+  latent_dim: 16
+  hidden_dim: 128
+  use_layer_norm: true
+  learning_rate_g: 0.0001
+  learning_rate_d: 0.0001
+  betas:
+  - 0.5
+  - 0.9
+  lambda_gp: 10.0
+  n_critic: 5
+  generator_steps: 5000
+  batch_size: 64
+  checkpoint_interval: 500
+  device: cpu
+  verbose: true
+vae_decoder:
+  latent_dim: 4
+  hidden_dim1: 128
+  hidden_dim2: 64
+  dropout_rate: 0.1
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  beta: 0.005
+  epochs: 100
+  batch_size: 64
+  device: cpu

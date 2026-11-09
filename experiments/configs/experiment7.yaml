@@ -1,0 +1,50 @@
+# Experiment 7: Plain VAE + Gradient Boosting on the paper's selected predictors.
+
+experiment: experiment7
+description: "Beta sensitivity of a 4-dimensional unsupervised VAE + GB across stratified 70/30 split seeds"
+
+runtime:
+  torch_num_threads: 1
+
+dataset:
+  raw_path: "dataset/orginal_data/gastric_cancer_dataset_raw.csv"
+  label_column: "label"
+  id_column: "patient_id"
+
+split:
+  test_size: 0.30
+  seed_start: 42
+  seed_end: 100
+
+preprocessing:
+  kmeans_clusters: 5
+  selected_features:
+    - gender
+    - age
+    - neu_lym
+    - hb
+    - alb
+    - cea
+    - ca125
+    - ca199
+  scale_vae_inputs: "StandardScaler fitted on each seed's training split"
+
+vae:
+  latent_dim: 4
+  beta_values: [0.0005, 0.005, 0.05, 0.5]
+  hidden_dim1: 128
+  hidden_dim2: 64
+  dropout_rate: 0.1
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  epochs: 100
+  batch_size: 64
+  device: "cpu"
+
+gradient_boosting:
+  n_estimators: 200
+  learning_rate: 0.1
+  max_depth: 4
+  min_samples_split: 4
+  min_samples_leaf: 2
+  max_features: "sqrt"
