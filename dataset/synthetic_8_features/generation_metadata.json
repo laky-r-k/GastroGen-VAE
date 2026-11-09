@@ -1,0 +1,167 @@
+{
+  "experiment": "experiment9",
+  "seed": 42,
+  "source_train_file": "dataset/split70_30/processed_and_selected_feature/gastric_cancer_train.csv",
+  "reference_test_file": "dataset/split70_30/processed_and_selected_feature/gastric_cancer_test.csv",
+  "train_rows": 496,
+  "test_rows": 213,
+  "features": [
+    "gender",
+    "age",
+    "neu_lym",
+    "hb",
+    "alb",
+    "cea",
+    "ca125",
+    "ca199"
+  ],
+  "log1p_features_for_generator_training": [
+    "neu_lym",
+    "cea",
+    "ca125",
+    "ca199"
+  ],
+  "label_column": "label",
+  "id_column_used_for_generation": false,
+  "generation_fit_scope": "70% processed training split only",
+  "quality_reference": "real held-out test split (not used to fit generators)",
+  "training_class_counts": {
+    "0": 218,
+    "1": 278
+  },
+  "generation_counts": {
+    "wgan_gp_train_proportions": {
+      "0": 218,
+      "1": 278
+    },
+    "wgan_gp_balanced": {
+      "0": 248,
+      "1": 248
+    },
+    "vae_decoder_train_proportions": {
+      "0": 218,
+      "1": 278
+    },
+    "vae_decoder_balanced": {
+      "0": 248,
+      "1": 248
+    },
+    "smote_train_proportions": {
+      "0": 218,
+      "1": 278
+    },
+    "smote_balanced": {
+      "0": 248,
+      "1": 248
+    }
+  },
+  "wgan_gp": {
+    "latent_dim": 16,
+    "hidden_dim": 128,
+    "use_layer_norm": true,
+    "learning_rate_g": 0.0001,
+    "learning_rate_d": 0.0001,
+    "betas": [
+      0.5,
+      0.9
+    ],
+    "lambda_gp": 10.0,
+    "n_critic": 5,
+    "generator_steps": 5000,
+    "batch_size": 64,
+    "checkpoint_interval": 500,
+    "device": "cpu",
+    "verbose": true
+  },
+  "vae_decoder": {
+    "latent_dim": 4,
+    "hidden_dim1": 128,
+    "hidden_dim2": 64,
+    "dropout_rate": 0.1,
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "beta": 0.005,
+    "epochs": 100,
+    "batch_size": 64,
+    "device": "cpu"
+  },
+  "smote": {
+    "random_state": 42,
+    "k_neighbors": 3
+  },
+  "postprocessing_adjustments": {
+    "wgan_gp_train_proportions": {
+      "gender_changed_to_binary": 496,
+      "age_rounded_or_clipped": 496,
+      "neu_lym_clipped_below_zero": 0,
+      "hb_clipped_below_zero": 0,
+      "alb_clipped_below_zero": 0,
+      "cea_clipped_below_zero": 0,
+      "ca125_clipped_below_zero": 0,
+      "ca199_clipped_below_zero": 0,
+      "hb_decimal_corrections": 0,
+      "alb_decimal_corrections": 0
+    },
+    "wgan_gp_balanced": {
+      "gender_changed_to_binary": 496,
+      "age_rounded_or_clipped": 496,
+      "neu_lym_clipped_below_zero": 0,
+      "hb_clipped_below_zero": 0,
+      "alb_clipped_below_zero": 0,
+      "cea_clipped_below_zero": 0,
+      "ca125_clipped_below_zero": 0,
+      "ca199_clipped_below_zero": 0,
+      "hb_decimal_corrections": 0,
+      "alb_decimal_corrections": 0
+    },
+    "vae_decoder_train_proportions": {
+      "gender_changed_to_binary": 496,
+      "age_rounded_or_clipped": 496,
+      "neu_lym_clipped_below_zero": 0,
+      "hb_clipped_below_zero": 0,
+      "alb_clipped_below_zero": 0,
+      "cea_clipped_below_zero": 0,
+      "ca125_clipped_below_zero": 0,
+      "ca199_clipped_below_zero": 0,
+      "hb_decimal_corrections": 0,
+      "alb_decimal_corrections": 0
+    },
+    "vae_decoder_balanced": {
+      "gender_changed_to_binary": 496,
+      "age_rounded_or_clipped": 496,
+      "neu_lym_clipped_below_zero": 0,
+      "hb_clipped_below_zero": 0,
+      "alb_clipped_below_zero": 0,
+      "cea_clipped_below_zero": 0,
+      "ca125_clipped_below_zero": 0,
+      "ca199_clipped_below_zero": 0,
+      "hb_decimal_corrections": 0,
+      "alb_decimal_corrections": 0
+    },
+    "smote_train_proportions": {
+      "gender_changed_to_binary": 13,
+      "age_rounded_or_clipped": 180,
+      "neu_lym_clipped_below_zero": 0,
+      "hb_clipped_below_zero": 0,
+      "alb_clipped_below_zero": 0,
+      "cea_clipped_below_zero": 0,
+      "ca125_clipped_below_zero": 0,
+      "ca199_clipped_below_zero": 0,
+      "hb_decimal_corrections": 0,
+      "alb_decimal_corrections": 0
+    },
+    "smote_balanced": {
+      "gender_changed_to_binary": 12,
+      "age_rounded_or_clipped": 178,
+      "neu_lym_clipped_below_zero": 0,
+      "hb_clipped_below_zero": 0,
+      "alb_clipped_below_zero": 0,
+      "cea_clipped_below_zero": 0,
+      "ca125_clipped_below_zero": 0,
+      "ca199_clipped_below_zero": 0,
+      "hb_decimal_corrections": 0,
+      "alb_decimal_corrections": 0
+    }
+  },
+  "metrics_note": "No diagnostic classifier, GB model, or TSTR model was trained; fidelity and novelty are assessed statistically and with nearest-neighbor distances."
+}
