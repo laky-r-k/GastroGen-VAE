@@ -1,0 +1,78 @@
+{
+  "experiment": "experiment10",
+  "seed": 98,
+  "train_rows": 496,
+  "test_rows": 213,
+  "features": [
+    "gender",
+    "age",
+    "neu_lym",
+    "hb",
+    "alb",
+    "cea",
+    "ca125",
+    "ca199"
+  ],
+  "label_column": "label",
+  "generator_fit_scope": "this seed's real training partition only",
+  "generator_transforms": {
+    "log1p": [
+      "neu_lym",
+      "cea",
+      "ca125",
+      "ca199"
+    ],
+    "scaler": "StandardScaler fitted on this seed's transformed training partition"
+  },
+  "wgan_gp": {
+    "latent_dim": 16,
+    "hidden_dim": 128,
+    "use_layer_norm": true,
+    "learning_rate_g": 0.0001,
+    "learning_rate_d": 0.0001,
+    "betas": [
+      0.5,
+      0.9
+    ],
+    "lambda_gp": 10.0,
+    "n_critic": 5,
+    "generator_steps": 5000,
+    "batch_size": 64,
+    "checkpoint_interval": 500,
+    "device": "cpu",
+    "verbose": false,
+    "log1p_features": [
+      "neu_lym",
+      "cea",
+      "ca125",
+      "ca199"
+    ],
+    "synthetic_size": "equal to real training rows; reverse training class counts to make the combined data exactly balanced"
+  },
+  "real_train_class_counts": {
+    "0": 218,
+    "1": 278
+  },
+  "synthetic_class_counts": {
+    "0": 278,
+    "1": 218
+  },
+  "combined_class_counts": {
+    "0": 496,
+    "1": 496
+  },
+  "synthetic_postprocessing_adjustments": {
+    "gender_changed_to_binary": 496,
+    "age_rounded_or_clipped": 496,
+    "neu_lym_clipped_below_zero": 0,
+    "hb_clipped_below_zero": 0,
+    "alb_clipped_below_zero": 0,
+    "cea_clipped_below_zero": 0,
+    "ca125_clipped_below_zero": 0,
+    "ca199_clipped_below_zero": 0,
+    "hb_decimal_corrections": 0,
+    "alb_decimal_corrections": 0
+  },
+  "quality_reference": "same seed's real training partition; held-out test is not used for synthetic quality checks",
+  "synthetic_csv": "dataset/synthetic_8_features/experiment10/seed_98/wgan_gp_balancing.csv"
+}
