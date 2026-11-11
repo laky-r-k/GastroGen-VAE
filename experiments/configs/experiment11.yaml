@@ -1,0 +1,59 @@
+# Experiment 11: local default TabPFN on real-only vs real + WGAN-GP data.
+
+experiment: experiment11
+description: "Compare the default local TabPFNClassifier on matched 70/30 splits using real-only and saved balanced real + WGAN-GP training data from Experiment 10"
+synthetic_input_dir: "dataset/synthetic_8_features/experiment10"
+synthetic_split_manifest: "results/experiment10/run_2026-11-10_02-14-37/splits/patient_split_manifest.csv"
+
+runtime:
+  torch_num_threads: 1
+
+dataset:
+  raw_path: "dataset/orginal_data/gastric_cancer_dataset_raw.csv"
+  label_column: "label"
+  id_column: "patient_id"
+
+split:
+  test_size: 0.30
+  seed_start: 42
+  seed_end: 100
+
+preprocessing:
+  kmeans_clusters: 5
+  selected_features:
+    - gender
+    - age
+    - neu_lym
+    - hb
+    - alb
+    - cea
+    - ca125
+    - ca199
+  tabpfn_input: "Eight paper-selected features in clinical units; default TabPFN preprocessing is used"
+
+tabpfn:
+  expected_version: "9.2.0"
+  import: "from tabpfn import TabPFNClassifier"
+  estimator: "TabPFNClassifier()"
+  constructor_overrides: {}
+  auto_tabpfn: false
+  hosted_client: false
+  record_installed_package_version: true
+  record_get_params: true
+  random_seed_control: "Python, NumPy, and PyTorch seeded by the split seed before each fit"
+
+synthetic_data:
+  source_experiment: experiment10
+  method: WGAN-GP
+  reuse_existing: true
+  overwrite_source: false
+  generated_rows_per_seed: "same as that seed's real training rows"
+  combined_label_balance: "50/50"
+
+output:
+  save_synthetic_per_seed: true
+  save_per_seed_metrics: true
+  save_summary_mean_sd: true
+  save_paired_auc_differences: true
+  save_split_manifest: true
+  save_tabpfn_version_and_parameters: true

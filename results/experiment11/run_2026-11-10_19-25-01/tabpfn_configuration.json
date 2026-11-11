@@ -1,0 +1,32 @@
+{
+  "class": "tabpfn.TabPFNClassifier",
+  "package_version": "9.2.0",
+  "parameters": {
+    "auto_scale_n_estimators": true,
+    "average_before_softmax": false,
+    "balance_probabilities": false,
+    "categorical_features_indices": null,
+    "device": "auto",
+    "differentiable_input": false,
+    "enable_torch_compile": false,
+    "eval_metric": null,
+    "fit_mode": "fit_preprocessors",
+    "ignore_pretraining_limits": false,
+    "inference_config": null,
+    "inference_precision": "auto",
+    "keep_cache_on_device": true,
+    "kv_cache_precision": null,
+    "memory_saving_mode": "auto",
+    "model_path": "auto",
+    "n_estimators": "auto",
+    "n_jobs": null,
+    "n_preprocessing_jobs": 1,
+    "random_state": 0,
+    "show_progress_bar": false,
+    "softmax_temperature": "auto",
+    "tuning_config": null
+  },
+  "constructor_overrides": {},
+  "hosted_client": false,
+  "auto_tabpfn": false
+}
